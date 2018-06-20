@@ -33,11 +33,13 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setuptools.setup(
-    name="Example python app",
+    name="ExamplePythonApp",
     version="0.0.0.1",
     author="[organization]",
     description=("An example python application template"),
     license="MIT",
-    packages=['python_app', 'python_app.utils', 'tests'],
-    long_description=read('README'),
+    packages=['python_app', 'python_app.utils', 'tests', 'config'],
+    long_description=read('README.md'),
+    test_suite="tests",
+    include_package_data=True,
 )

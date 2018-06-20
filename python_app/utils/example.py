@@ -20,6 +20,7 @@ A more elaborate description of example utility.
 
 import logging
 import logging.config
+import os
 import pkg_resources
 
 import python_app.utils.exceptions as exceptions
@@ -42,13 +43,17 @@ class Example(object):
             param2 (int):  Second input parameter
 
         Raises:
-            IOError: Error accessing the config file
+            IOError: Error accessing the config file or log file
+            OSError: Error creating utility directory
 
         """
 
-        # setup logger and config
+        # setup logger, config, and utility directory
+        if not os.path.exists(
+                os.path.join(os.path.expanduser("~"), '.python_app')):
+            os.makedirs(os.path.join(os.path.expanduser("~"), '.python_app'))
         self._config_file = pkg_resources.resource_filename(
-            pkg_resources.Requirement.parse("Python App"), "python.conf")
+            pkg_resources.Requirement.parse("ExamplePythonApp"), "config/python_app.conf")
         logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
         self._logger = logging.getLogger("python")
 
