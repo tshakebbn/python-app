@@ -1,0 +1,80 @@
+#!/usr/bin/python
+"""An example python app
+
+@file example_app.py
+
+A more elaborate description of example python app.
+
+@author [organization]
+@author [name] (optional)
+
+@par [unique category]
+[designation]
+
+@par Notifications
+[distribution designation]
+[other designations]
+
+@copyright Copyright [year] [organization]
+
+"""
+
+import traceback
+import sys
+import argparse
+import ConfigParser
+import pkg_resources
+
+import python_app
+
+def setup_argparser():
+    """ Creates python app argument parser
+
+    Returns
+        parser (obj):   argparse object
+
+    """
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--arg_string", required=True, type=str,
+                        help="Command line string argument")
+    parser.add_argument("--arg_int", required=True, type=int,
+                        help="Command line int argument")
+    return parser
+
+def main():
+    """Main function if ran standalone"""
+
+    args = setup_argparser().parse_args()
+
+    try:
+        # get config file arguments
+        config = ConfigParser.RawConfigParser()
+        config.read(pkg_resources.resource_filename(
+            pkg_resources.Requirement.parse("ExamplePythonApp"),
+            "config/python_app.conf"))
+    except IOError:
+        traceback.print_exc()
+        sys.exit("Aborting. Unable to find config file")
+    else:
+        pass
+
+    try:
+        example_obj = python_app.Example(param1=1, param2=2)
+    except IOError:
+        traceback.print_exc()
+        sys.exit("Aborting. Error with example utility")
+    except OSError:
+        traceback.print_exc()
+        sys.exit("Aborting. Error with example utility")
+    else:
+        pass
+
+    print "String argument: {}".format(args.arg_string)
+    print "Int argument: {}".format(args.arg_int)
+    print "Config argument: {}".format(config.get('options', 'name'))
+
+    del example_obj
+
+if __name__ == '__main__':
+    main()
