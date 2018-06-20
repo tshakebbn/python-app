@@ -24,31 +24,35 @@ import sys
 import python_app.utils.example as example
 
 class TestExample(unittest.TestCase):
-    """Unittest TestCase for Example class
+    """Unittest TestCase for Example class"""
 
-	"""
+    def setUp(self):
+        """Set up method run before all test methods"""
+
+        self.test_example_class = example.Example(param1=1, param2=2)
+
+    def tearDown(self):
+        """Tear down method for all test methods"""
+
+        del self.test_example_class
 
     def test_methods(self):
-        """Method to test example class methods
+        """Method to test example class methods"""
 
-        """
-        with example.Example(param1=1, param2=2) as test_example:
-            self.assertEquals(test_example.attr1, 1)
-            self.assertEquals(test_example.attr2, 2)
-            self.assertEquals(example.Example.example_static_method(
-                param1=1, param2=2), False)
-            self.assertEquals(example.Example.example_static_method(
-                param1=2, param2=1), True)
-            self.assertEquals(example.Example.example_static_method(
-                param1=2, param2=2), False)
-            self.assertEquals(test_example.example_method(), 1)
-            test_example.attr4 = 4
-            self.assertEquals(test_example.attr4, 4)
+        self.assertEquals(self.test_example_class.attr1, 1)
+        self.assertEquals(self.test_example_class.attr2, 2)
+        self.assertEquals(example.Example.example_static_method(
+            param1=1, param2=2), False)
+        self.assertEquals(example.Example.example_static_method(
+            param1=2, param2=1), True)
+        self.assertEquals(example.Example.example_static_method(
+            param1=2, param2=2), False)
+        self.assertEquals(self.test_example_class.example_method(), 1)
+        self.test_example_class.attr4 = 4
+        self.assertEquals(self.test_example_class.attr4, 4)
 
 def main():
-    """Main function if ran standalone
-
-    """
+    """Main function if ran standalone"""
 
     test_classes = [TestExample]
     suites_list = []
