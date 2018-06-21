@@ -22,6 +22,7 @@ import logging
 import logging.config
 import os
 import pkg_resources
+import appdirs
 
 import python_app.utils.exceptions as exceptions
 
@@ -49,13 +50,7 @@ class Example(object):
         """
 
         # setup logger, config, and utility directory
-        if not os.path.exists(
-                os.path.join(os.path.expanduser("~"), '.python_app')):
-            os.makedirs(os.path.join(os.path.expanduser("~"), '.python_app'))
-        self._config_file = pkg_resources.resource_filename(
-            pkg_resources.Requirement.parse("ExamplePythonApp"), "config/python_app.conf")
-        logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
-        self._logger = logging.getLogger("python")
+        self._configure()
 
         self.attr1 = param1
         self.attr2 = param2
@@ -121,5 +116,19 @@ class Example(object):
         """
         self._attr4 = value
 
-    def _private(self):
-        pass
+    def _configure(self):
+
+        self._config_directory = appdirs.user_config_dir('example_python_app')
+        self._config_file = os.path.join(self._config_directory, 'python_app.conf')
+        if not os.path.isfile(self._config_file):
+            self._create_user_config()
+        logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
+        self._logger = logging.getLogger("python_app")
+
+    def _create_user_config(self):
+
+        source = pkg_resources.resource_stream(__name__, '../../config/python_app.conf')
+        if not os.path.isdir(self._config_directory):
+            os.makedirs(self._config_directory)
+        with open(self._config_file, 'w') as destination:
+            destination.writelines(source)

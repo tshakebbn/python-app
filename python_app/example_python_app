@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """An example python app
 
-@file example_app.py
+@file example_python_app
 
 A more elaborate description of example python app.
 
@@ -20,10 +20,11 @@ A more elaborate description of example python app.
 """
 
 import traceback
+import os
 import sys
 import argparse
 import ConfigParser
-import pkg_resources
+import appdirs
 
 import python_app
 
@@ -36,6 +37,7 @@ def setup_argparser():
     """
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("-v", "--version", action="version", version="Example Python App 1.0.0.0")
     parser.add_argument("--arg_string", required=True, type=str,
                         help="Command line string argument")
     parser.add_argument("--arg_int", required=True, type=int,
@@ -50,9 +52,9 @@ def main():
     try:
         # get config file arguments
         config = ConfigParser.RawConfigParser()
-        config.read(pkg_resources.resource_filename(
-            pkg_resources.Requirement.parse("ExamplePythonApp"),
-            "config/python_app.conf"))
+        config_directory = appdirs.user_config_dir('example_python_app')
+        config_file = os.path.join(config_directory, 'python_app.conf')
+        config.read(config_file)
     except IOError:
         traceback.print_exc()
         sys.exit("Aborting. Unable to find config file")
