@@ -40,3 +40,22 @@ class ExampleError(Error):
 
         super(ExampleError, self).__init__(msg)
         self.msg = msg
+
+class ConfigError(Error):
+    """An config file or configuration exception.
+
+    Attributes:
+        msg (str):  Error message
+
+    """
+
+    def __init__(self, msg):
+        """Constructor with error message argument.
+
+        Args:
+            msg (str):  Error message
+
+        """
+
+        super(ConfigError, self).__init__(msg)
+        self.msg = msg

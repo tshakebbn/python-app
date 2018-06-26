@@ -21,6 +21,7 @@ A more elaborate description of example utility.
 import logging
 import logging.config
 import os
+import ConfigParser
 import pkg_resources
 import appdirs
 
@@ -46,6 +47,7 @@ class Example(object):
         Raises:
             IOError: Error accessing the config file or log file
             OSError: Error creating utility directory
+            ConfigError: Error with logger level in config file
 
         """
 
@@ -118,12 +120,46 @@ class Example(object):
 
     def _configure(self):
 
+        # configure directories and files
         self._config_directory = appdirs.user_config_dir('example_python_app')
+        self._log_directory = appdirs.user_log_dir('example_python_app')
         self._config_file = os.path.join(self._config_directory, 'python_app.conf')
         if not os.path.isfile(self._config_file):
             self._create_user_config()
-        logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
+        self._log_file = os.path.join(self._log_directory, 'python_app.log')
+        if not os.path.isdir(self._log_directory):
+            os.makedirs(self._log_directory)
+
+        # configure logger
+        #logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
         self._logger = logging.getLogger("python_app")
+        console = logging.StreamHandler()
+        console.setLevel(logging.DEBUG)
+        formatter = logging.Formatter(
+            '%(asctime)s <%(levelname)s> [%(filename)s: %(lineno)d]: %(message)s')
+        console.setFormatter(formatter)
+        self._logger.addHandler(console)
+        file_handle = logging.FileHandler(self._log_file)
+        file_handle.setLevel(logging.DEBUG)
+        file_handle.setFormatter(formatter)
+        self._logger.addHandler(file_handle)
+
+        # get log level from config file
+        self._config = ConfigParser.RawConfigParser()
+        self._config.read(self._config_file)
+
+        if self._config.get('logger', 'level') == 'DEBUG':
+            self._logger.setLevel(logging.DEBUG)
+        elif self._config.get('logger', 'level') == 'INFO':
+            self._logger.setLevel(logging.INFO)
+        elif self._config.get('logger', 'level') == 'WARNING':
+            self._logger.setLevel(logging.WARNING)
+        elif self._config.get('logger', 'level') == 'ERROR':
+            self._logger.setLevel(logging.ERROR)
+        elif self._config.get('logger', 'level') == 'CRITICAL':
+            self._logger.setLevel(logging.CRITICAL)
+        else:
+            raise exceptions.ConfigError("Invalid logger level in config file")
 
     def _create_user_config(self):
 
