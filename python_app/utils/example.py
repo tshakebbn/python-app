@@ -1,20 +1,22 @@
 """An example utility
 
-@file example.py
+**File** example.py
 
 A more elaborate description of example utility.
 
-@author [organization]
-@author [name] (optional)
+**Author** [organization]
 
-@par [unique category]
-[designation]
+**Author** [name] (optional)
 
-@par Notifications
+**[Unique category]** [designation]
+
+**Notifications:**
+
 [distribution designation]
+
 [other designations]
 
-@copyright Copyright [year] [organization]
+**Copyright** [year] [organization]
 
 """
 
@@ -30,26 +32,24 @@ import python_app.utils.exceptions as exceptions
 class Example(object):
     """An example class.
 
+    Args:
+        param1 (int): First input parameter
+        param2 (int): Second input parameter
+
     Attributes:
         attr1 (int):  First attribute
         attr2 (int):  Second attribute
         attr3 (int):  Third attribute
 
+    Raises:
+        IOError: Error accessing the config file or log file
+        OSError: Error creating utility directory
+        ConfigError: Error with logger level in config file
+
     """
 
     def __init__(self, param1, param2):
-        """A brief description of __init__ method.
-
-        Args:
-            param1 (int):  First input parameter
-            param2 (int):  Second input parameter
-
-        Raises:
-            IOError: Error accessing the config file or log file
-            OSError: Error creating utility directory
-            ConfigError: Error with logger level in config file
-
-        """
+        """A brief description of __init__ method."""
 
         # setup logger, config, and utility directory
         self._configure()
