@@ -11,11 +11,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: python_app
-
-.. autoclass:: Example
-    :members:
-
 Indices and tables
 ==================
 
