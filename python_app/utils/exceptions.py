@@ -1,20 +1,23 @@
 """An example exception
 
-@file exceptions.py
+**File** exceptions.py
 
 A more elaborate description of exceptions.
 
-@author [organization]
-@author [name] (optional)
+**Author** [organization]
 
-@par [unique category]
+**Author** [name] (optional)
+
+**[unique category]**
 [designation]
 
-@par Notifications
+**Notifications:**
+
 [distribution designation]
+
 [other designations]
 
-@copyright Copyright [year] [organization]
+**Copyright** [year] [organization]
 
 """
 
@@ -25,18 +28,16 @@ class Error(Exception):
 class ExampleError(Error):
     """An example exception.
 
+    Args:
+        msg (str): Error message
+
     Attributes:
         msg (str):  Error message
 
     """
 
     def __init__(self, msg):
-        """A brief description of __init__ method.
-
-        Args:
-            msg (str):  Error message
-
-        """
+        """A brief description of __init__ method."""
 
         super(ExampleError, self).__init__(msg)
         self.msg = msg
@@ -44,18 +45,16 @@ class ExampleError(Error):
 class ConfigError(Error):
     """An config file or configuration exception.
 
+    Args:
+        msg (str): Error message
+
     Attributes:
         msg (str):  Error message
 
     """
 
     def __init__(self, msg):
-        """Constructor with error message argument.
-
-        Args:
-            msg (str):  Error message
-
-        """
+        """Constructor with error message argument."""
 
         super(ConfigError, self).__init__(msg)
         self.msg = msg
