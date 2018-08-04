@@ -57,8 +57,10 @@ def setup_argparser():
 
     """
 
+    version = pkg_resources.require('example_python_app')[0].version
     parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--version", action="version", version="Example Python App 1.0.0.0")
+    parser.add_argument("-v", "--version", action="version",
+                        version="Example Python App " + str(version))
     parser.add_argument("--arg_string", required=True, type=str,
                         help="Command line string argument")
     parser.add_argument("--arg_int", required=True, type=int,
