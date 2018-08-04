@@ -37,7 +37,7 @@ setuptools.setup(
     author="[organization]",
     description=("An example python application template"),
     license="MIT",
-    packages=['python_app', 'python_app.utils', 'tests'],
+    packages=['python_app', 'python_app.utils', 'tests', 'config'],
     long_description=read('README.md'),
     test_suite="tests",
     include_package_data=True,
