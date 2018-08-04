@@ -163,7 +163,7 @@ class Example(object):
 
     def _create_user_config(self):
 
-        source = pkg_resources.resource_stream(__name__, '../../config/python_app.conf')
+        source = pkg_resources.resource_stream('config', 'python_app.conf')
         if not os.path.isdir(self._config_directory):
             os.makedirs(self._config_directory)
         with open(self._config_file, 'w') as destination:

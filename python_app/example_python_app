@@ -41,7 +41,7 @@ def setup_config():
     config_directory = appdirs.user_config_dir('example_python_app')
     config_file = os.path.join(config_directory, 'python_app.conf')
     if not os.path.isfile(config_file):
-        source = pkg_resources.resource_stream(__name__, '../config/python_app.conf')
+        source = pkg_resources.resource_stream('config', 'python_app.conf')
         if not os.path.isdir(config_directory):
             os.makedirs(config_directory)
         with open(config_file, 'w') as destination:
@@ -90,9 +90,16 @@ def main():
     else:
         pass
 
-    print "String argument: {}".format(args.arg_string)
-    print "Int argument: {}".format(args.arg_int)
-    print "Config argument: {}".format(config.get('options', 'name'))
+    try:
+        print "String argument: {}".format(args.arg_string)
+        print "Int argument: {}".format(args.arg_int)
+        print "Config argument: {}".format(config.get('options', 'name'))
+    except ConfigParser.NoSectionError:
+        traceback.print_exc()
+        del example_obj
+        sys.exit("Aborting. Missing section in config file")
+    else:
+        pass
 
     del example_obj
 
