@@ -33,7 +33,7 @@ def read(fname):
 
 setuptools.setup(
     name="example_python_app",
-    version="1.0.0.0",
+    version="1.1.0.1",
     author="[organization]",
     description=("An example python application template"),
     license="MIT",
