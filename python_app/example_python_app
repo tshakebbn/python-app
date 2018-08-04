@@ -24,20 +24,43 @@ import os
 import sys
 import argparse
 import ConfigParser
+import pkg_resources
 import appdirs
 
 import python_app
 
+def setup_config():
+    """ Setups config file
+
+    Returns:
+        config (obj):   ConfigParser object
+
+    """
+
+    config = ConfigParser.RawConfigParser()
+    config_directory = appdirs.user_config_dir('example_python_app')
+    config_file = os.path.join(config_directory, 'python_app.conf')
+    if not os.path.isfile(config_file):
+        source = pkg_resources.resource_stream('config', 'python_app.conf')
+        if not os.path.isdir(config_directory):
+            os.makedirs(config_directory)
+        with open(config_file, 'w') as destination:
+            destination.writelines(source)
+    config.read(config_file)
+    return config
+
 def setup_argparser():
     """ Creates python app argument parser
 
-    Returns
+    Returns:
         parser (obj):   argparse object
 
     """
 
+    version = pkg_resources.require('example_python_app')[0].version
     parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--version", action="version", version="Example Python App 1.0.0.0")
+    parser.add_argument("-v", "--version", action="version",
+                        version="Example Python App " + str(version))
     parser.add_argument("--arg_string", required=True, type=str,
                         help="Command line string argument")
     parser.add_argument("--arg_int", required=True, type=int,
@@ -51,10 +74,7 @@ def main():
 
     try:
         # get config file arguments
-        config = ConfigParser.RawConfigParser()
-        config_directory = appdirs.user_config_dir('example_python_app')
-        config_file = os.path.join(config_directory, 'python_app.conf')
-        config.read(config_file)
+        config = setup_config()
     except IOError:
         traceback.print_exc()
         sys.exit("Aborting. Unable to find config file")
@@ -72,9 +92,16 @@ def main():
     else:
         pass
 
-    print "String argument: {}".format(args.arg_string)
-    print "Int argument: {}".format(args.arg_int)
-    print "Config argument: {}".format(config.get('options', 'name'))
+    try:
+        print "String argument: {}".format(args.arg_string)
+        print "Int argument: {}".format(args.arg_int)
+        print "Config argument: {}".format(config.get('options', 'name'))
+    except ConfigParser.NoSectionError:
+        traceback.print_exc()
+        del example_obj
+        sys.exit("Aborting. Missing section in config file")
+    else:
+        pass
 
     del example_obj
 
