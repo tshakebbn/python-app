@@ -3,6 +3,8 @@ An example utility
 
 A more elaborate description of example utility. (optional)
 
+@file example.py
+
 @author [organization]
 @author [name] (optional)
 

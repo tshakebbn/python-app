@@ -3,6 +3,8 @@ An example exception
 
 A more elaborate description of exceptions. (optional)
 
+@file exceptions.py
+
 @author [organization]
 @author [name] (optional)
 
