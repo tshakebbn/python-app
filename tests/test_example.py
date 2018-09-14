@@ -1,8 +1,6 @@
 """Unit test fixture for example utility
 
-@file test_example.py
-
-A more elaborate description of unit test fixture.
+A more elaborate description of unit test fixture. (optional)
 
 @author [organization]
 @author [name] (optional)

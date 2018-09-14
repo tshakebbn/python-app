@@ -1,23 +1,21 @@
-"""An example exception
+"""@package exceptions
+An example exception
 
-**File** exceptions.py
+A more elaborate description of exceptions. (optional)
 
-A more elaborate description of exceptions.
+@file exceptions.py
 
-**Author** [organization]
+@author [organization]
+@author [name] (optional)
 
-**Author** [name] (optional)
-
-**[unique category]**
+@par [unique category]
 [designation]
 
-**Notifications:**
-
+@par Notifications:
 [distribution designation]
-
 [other designations]
 
-**Copyright** [year] [organization]
+@copyright Copyright [year] [organization]
 
 """
 
@@ -29,10 +27,10 @@ class ExampleError(Error):
     """An example exception.
 
     Args:
-        msg (str): Error message
+        msg (str):  The error message
 
     Attributes:
-        msg (str):  Error message
+        msg (str):  The error message
 
     """
 
@@ -46,10 +44,10 @@ class ConfigError(Error):
     """An config file or configuration exception.
 
     Args:
-        msg (str): Error message
+        msg (str):  The error message
 
     Attributes:
-        msg (str):  Error message
+        msg (str):  The error message
 
     """
 

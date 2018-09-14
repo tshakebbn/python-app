@@ -33,7 +33,7 @@ def read(fname):
 
 setuptools.setup(
     name="example_python_app",
-    version="1.1.0.1",
+    version="1.2.0.0",
     author="[organization]",
     description=("An example python application template"),
     license="MIT",
@@ -41,5 +41,5 @@ setuptools.setup(
     long_description=read('README.md'),
     test_suite="tests",
     include_package_data=True,
-    scripts=['python_app/example_python_app'],
+    scripts=['python_app/example_python_app', 'py_filter'],
 )

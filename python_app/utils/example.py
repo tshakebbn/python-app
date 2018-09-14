@@ -1,22 +1,21 @@
-"""An example utility
+"""@package example
+An example utility
 
-**File** example.py
+A more elaborate description of example utility. (optional)
 
-A more elaborate description of example utility.
+@file example.py
 
-**Author** [organization]
+@author [organization]
+@author [name] (optional)
 
-**Author** [name] (optional)
+@par [Unique category]
+[designation]
 
-**[Unique category]** [designation]
-
-**Notifications:**
-
+@par Notifications:
 [distribution designation]
-
 [other designations]
 
-**Copyright** [year] [organization]
+@copyright Copyright [year] [organization]
 
 """
 
@@ -66,8 +65,8 @@ class Example(object):
         """Example method description.
 
         Args:
-            param1 (int): First input parameter
-            param2 (int): Second input parameter
+            param1 (int):   First input parameter
+            param2 (int):   Second input parameter
 
         Returns:
             True if param1 is greater than param2, False otherwise
@@ -113,7 +112,7 @@ class Example(object):
         """Setter method for _attr4 attribute
 
         Args:
-            value (int): value to set _attr4
+            value (int):    value to set _attr4
 
         """
         self._attr4 = value
