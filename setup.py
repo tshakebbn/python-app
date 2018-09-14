@@ -41,5 +41,5 @@ setuptools.setup(
     long_description=read('README.md'),
     test_suite="tests",
     include_package_data=True,
-    scripts=['python_app/example_python_app'],
+    scripts=['python_app/example_python_app', 'py_filter'],
 )
