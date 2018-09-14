@@ -1,23 +1,19 @@
-"""An example exception
+"""@package exceptions
+An example exception
 
-**File** exceptions.py
+A more elaborate description of exceptions. (optional)
 
-A more elaborate description of exceptions.
+@author [organization]
+@author [name] (optional)
 
-**Author** [organization]
-
-**Author** [name] (optional)
-
-**[unique category]**
+@par [unique category]
 [designation]
 
-**Notifications:**
-
+@par Notifications:
 [distribution designation]
-
 [other designations]
 
-**Copyright** [year] [organization]
+Copyright [year] [organization]
 
 """
 
