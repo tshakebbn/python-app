@@ -25,10 +25,10 @@ class ExampleError(Error):
     """An example exception.
 
     Args:
-        msg (str):  Error message
+        msg (str):  The error message
 
     Attributes:
-        msg (str):  Error message
+        msg (str):  The error message
 
     """
 
@@ -42,10 +42,10 @@ class ConfigError(Error):
     """An config file or configuration exception.
 
     Args:
-        msg (str):  Error message
+        msg (str):  The error message
 
     Attributes:
-        msg (str):  Error message
+        msg (str):  The error message
 
     """
 
