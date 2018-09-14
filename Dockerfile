@@ -1,7 +1,7 @@
 FROM nginx:1.14
 
 RUN apt-get -y update && apt-get install -y build-essential python python-dev \
-python-pip
+python-pip doxygen
 
 RUN pip install appdirs doxypypy
 
@@ -15,9 +15,19 @@ WORKDIR /home/tempuser/python-app/
 
 USER tempuser
 
+RUN python setup.py build
+
+RUN python setup.py test
+
+USER root
+
+RUN python setup.py install
+
+USER tempuser
+
 RUN doxygen Doxyfile
 
 USER root
 
-RUN cp -r ./html/* /usr/share/nginx/html/
+RUN cp -r ./docs/html/* /usr/share/nginx/html/
 
