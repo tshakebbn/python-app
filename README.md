@@ -43,8 +43,12 @@ sudo python setup.py install
 ```
 
 ### Docs
-TODO
-doxygen Doxyfile right now
+
+To build the documentation, run the following command:
+
+```
+doxygen Doxyfile
+```
 
 ## Docker Build Instructions
 
