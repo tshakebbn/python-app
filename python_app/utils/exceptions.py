@@ -13,7 +13,7 @@ A more elaborate description of exceptions. (optional)
 [distribution designation]
 [other designations]
 
-Copyright [year] [organization]
+@copyright Copyright [year] [organization]
 
 """
 
@@ -25,7 +25,7 @@ class ExampleError(Error):
     """An example exception.
 
     Args:
-        msg (str): Error message
+        msg (str):  Error message
 
     Attributes:
         msg (str):  Error message
@@ -42,7 +42,7 @@ class ConfigError(Error):
     """An config file or configuration exception.
 
     Args:
-        msg (str): Error message
+        msg (str):  Error message
 
     Attributes:
         msg (str):  Error message
