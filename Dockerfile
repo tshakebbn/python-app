@@ -13,8 +13,11 @@ RUN chown -R tempuser:tempuser /home/tempuser/python-app
 
 WORKDIR /home/tempuser/python-app/docs
 
+USER tempuser
+
 RUN make html
+
+USER root
 
 RUN cp -r ./_build/html/* /usr/share/nginx/html/
 
-CMD tail -f /dev/null
