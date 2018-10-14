@@ -132,16 +132,17 @@ class Example(object):
         # configure logger
         #logging.config.fileConfig(self._config_file, disable_existing_loggers=False)
         self._logger = logging.getLogger("python_app")
-        console = logging.StreamHandler()
-        console.setLevel(logging.DEBUG)
-        formatter = logging.Formatter(
-            '%(asctime)s <%(levelname)s> [%(filename)s: %(lineno)d]: %(message)s')
-        console.setFormatter(formatter)
-        self._logger.addHandler(console)
-        file_handle = logging.FileHandler(self._log_file)
-        file_handle.setLevel(logging.DEBUG)
-        file_handle.setFormatter(formatter)
-        self._logger.addHandler(file_handle)
+        if not self._logger.handlers:
+            console = logging.StreamHandler()
+            console.setLevel(logging.DEBUG)
+            formatter = logging.Formatter(
+                '%(asctime)s <%(levelname)s> [%(filename)s: %(lineno)d]: %(message)s')
+            console.setFormatter(formatter)
+            self._logger.addHandler(console)
+            file_handle = logging.FileHandler(self._log_file)
+            file_handle.setLevel(logging.DEBUG)
+            file_handle.setFormatter(formatter)
+            self._logger.addHandler(file_handle)
 
         # get log level from config file
         self._config = ConfigParser.RawConfigParser()
